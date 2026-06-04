@@ -1,0 +1,29 @@
+verilog_defaults -add -Iibex/vendor/lowrisc_ip/ip/prim/rtl
+verilog_defaults -add -Iibex/vendor/lowrisc_ip/dv/sv/dv_utils
+
+read_verilog -sv ibex/rtl/ibex_pkg.sv
+read_verilog -sv ibex/rtl/tca_decoder.v
+read_verilog -sv ibex/rtl/ibex_alu.sv
+read_verilog -sv ibex/rtl/ibex_branch_predict.sv
+read_verilog -sv ibex/rtl/ibex_compressed_decoder.sv
+read_verilog -sv ibex/rtl/ibex_controller.sv
+read_verilog -sv ibex/rtl/ibex_counter.sv
+read_verilog -sv ibex/rtl/ibex_cs_registers.sv
+read_verilog -sv ibex/rtl/ibex_csr.sv
+read_verilog -sv ibex/rtl/ibex_decoder.sv
+read_verilog -sv ibex/rtl/ibex_dummy_instr.sv
+read_verilog -sv ibex/rtl/ibex_ex_block.sv
+read_verilog -sv ibex/rtl/ibex_fetch_fifo.sv
+read_verilog -sv ibex/rtl/ibex_icache.sv
+read_verilog -sv ibex/rtl/ibex_id_stage.sv
+read_verilog -sv ibex/rtl/ibex_if_stage.sv
+read_verilog -sv ibex/rtl/ibex_load_store_unit.sv
+read_verilog -sv ibex/rtl/ibex_multdiv_fast.sv
+read_verilog -sv ibex/rtl/ibex_pmp.sv
+read_verilog -sv ibex/rtl/ibex_prefetch_buffer.sv
+read_verilog -sv ibex/rtl/ibex_wb_stage.sv
+read_verilog -sv ibex/rtl/ibex_core.sv
+
+synth -top ibex_core
+
+stat
