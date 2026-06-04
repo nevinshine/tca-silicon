@@ -37,8 +37,8 @@ Modern hardware architectures typically rely on MMU boundaries and privilege rin
 This repository builds upon the [lowRISC Ibex](https://github.com/lowRISC/ibex) 32-bit RISC-V core. 
 
 ### Core Components
-- `/ibex`: The embedded submodule containing the baseline RTL implementation of the Ibex core.
-- `synth.ys`: Yosys synthesis script targeting the specific modifications and hardware hooks integrated for TCA semantic tracking.
+- `rtl/ibex`: The embedded submodule containing the baseline RTL implementation of the Ibex core.
+- `synth/synth.ys`: Yosys synthesis script targeting the specific modifications and hardware hooks integrated for TCA semantic tracking.
 
 ## Validation Stages
 
@@ -75,7 +75,7 @@ git submodule update --init --recursive
 To synthesize the TCA-enabled core logic, run the included Yosys script:
 
 ```bash
-yosys -s synth.ys
+yosys -s synth/synth.ys
 ```
 
 ## Integration with Sentinel Stack
