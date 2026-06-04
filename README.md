@@ -4,7 +4,23 @@
 [![Target](https://img.shields.io/badge/Target-Ibex%20RISC--V-orange)](#)
 [![Status](https://img.shields.io/badge/Status-Experimental-yellow)](#)
 
-The **Trusted Computing Architecture (TCA) Silicon** repository contains the hardware-assisted RISC-V security implementation for the Sentinel Stack. TCA enforces semantic policies directly at the silicon level, providing taint-aware execution mediation and architectural information flow control (IFC).
+The **Trusted Computing Architecture (TCA) Silicon** repository contains the hardware-assisted RISC-V security implementation for the Sentinel Stack. TCA explores semantic policy enforcement directly at the architecture level, providing taint-aware execution mediation and architectural information flow control (IFC).
+
+## Research Status
+
+TCA Silicon is currently a research and simulation prototype.
+
+Current validation demonstrates:
+- simulated QEMU exception semantics
+- architectural taint propagation behavior
+- custom trap routing
+
+The project does NOT yet provide:
+- synthesized hardware guarantees
+- timing validation
+- side-channel resistance
+- speculative execution analysis
+- FPGA or ASIC validation
 
 ## Overview
 
@@ -12,8 +28,8 @@ Modern hardware architectures typically rely on MMU boundaries and privilege rin
 
 **TCA** bridges the gap between software intent and hardware enforcement by introducing:
 *   **Compiler-Linked Intent Propagation:** Software intents compiled by the Telos language and Sentinel LLVM passes are lifted directly into custom hardware opcodes (e.g., `llvm.telos.intent.start`).
-*   **Taint-Aware Execution Mediation:** Memory tags physically propagate "taint" colors at the load/store boundary.
-*   **Hardware IFC Policy Enforcement:** The silicon monitors intent hashes against the current taint color during MMIO operations and context switches.
+*   **Taint-Aware Execution Mediation:** Architectural taint state propagates across monitored memory operations.
+*   **Hardware IFC Policy Enforcement:** The simulated architecture evaluates intent hashes against the current taint color during MMIO operations and context switches.
 *   **Custom Exception Semantics:** If an unauthorized flow is detected, the pipeline aborts the transaction and traps the core into Machine Mode via `RISCV_EXCP_TCA_INTENT_VIOLATION` (0x1b).
 
 ## Architecture
@@ -23,6 +39,13 @@ This repository builds upon the [lowRISC Ibex](https://github.com/lowRISC/ibex) 
 ### Core Components
 - `/ibex`: The embedded submodule containing the baseline RTL implementation of the Ibex core.
 - `synth.ys`: Yosys synthesis script targeting the specific modifications and hardware hooks integrated for TCA semantic tracking.
+
+## Validation Stages
+
+*   **Phase 1:** QEMU semantic validation
+*   **Phase 2:** Verilator/RTL validation
+*   **Phase 3:** FPGA synthesis
+*   **Phase 4:** Physical timing characterization
 
 ## Getting Started
 
